@@ -18,16 +18,14 @@ res[array.length] = numbers;
 
 public static int[] insert(int[] array, int index, int number) {
     int [] res = java.util.Arrays.copyOf(array,array.length+1);
-    System.arraycopy(array,0,res,0,index);
-    System.arraycopy(array,index,res,index+1,array.length-index);
+    System.arraycopy(array,index,res,index+1,array.length - index);
     res[index] = number;
  return res;   
 }
 
 public static int[] remove(int[]array, int index) {
     int [] res = java.util.Arrays.copyOf(array,array.length-1);
-    System.arraycopy(array,0,res,0,index);
-    System.arraycopy(array, index+1, res,index, res.length-index);
+    System.arraycopy(array,index+1,res,index,array.length-index-1);
     return res;
 }
 }
