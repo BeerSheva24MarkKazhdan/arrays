@@ -107,6 +107,10 @@ assertEquals(3, Arrays.binarySearch(sortedArray, 10)); // Checking binary search
 assertEquals(6, Arrays.binarySearch(sortedArray, 14)); // Checking binary search method for correct indexes
 assertEquals(-1, Arrays.binarySearch(sortedArray, -5)); //Checking binary search for out of array values. 0 should be at 0 position, so method must return -1 value (-index - 1)
 assertEquals(-8, Arrays.binarySearch(sortedArray, 15)); //Checking binary search for out of array values. 8 should be at 7 position, so method must return -8 value (-index - 1)
+int[]shortArray = {1,2};
+int[] sortedShortArray = java.util.Arrays.copyOf(shortArray, shortArray.length); //Make a copy of origin shortArray for further sorting
+sort(sortedShortArray); //Sort shortArray
+assertEquals(-3, Arrays.binarySearch(sortedShortArray, 5)); //Checking binary search for out of array values. 0 should be at 0 position, so method must return -1 value (-index - 1)
 }
 
 @Test
@@ -120,6 +124,8 @@ int[]expected2 = {-5,-4,3,7,10,12,13,14};
 assertArrayEquals(expected2, insertSorted(sortedArray, -5)); //Check if the "key" value is really at sorted array
 int[]expected3 = {-4,3,7,10,12,13,14,15};
 assertArrayEquals(expected3, insertSorted(sortedArray, 15)); //Check if the "key" value is really at sorted array
+int[]expected4 = {-4,3,3,7,10,12,13,14};
+assertArrayEquals(expected4, insertSorted(sortedArray, 3)); //Check if the "key" value is really at sorted array and correct work with already existing values
 }
 
 @Test

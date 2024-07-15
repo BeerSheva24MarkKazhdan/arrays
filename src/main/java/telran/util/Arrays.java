@@ -77,15 +77,15 @@ public static int binarySearch(int[] array, int key){
             high = mid - 1;
         }
         mid = low + ((high - low) / 2);
-        if (low > high) {
-            break;
-        }
     }
     return -mid-1;
 }
 
 public static int[] insertSorted(int[] array, int number){
-    int keyIndex = Math.abs(binarySearch(array, number))-1;
+    int keyIndex = binarySearch(array, number);
+    if (keyIndex < 0){
+        keyIndex = Math.abs(keyIndex)-1;
+    } 
     array=insert(array, keyIndex, number);
     return array;
 }
