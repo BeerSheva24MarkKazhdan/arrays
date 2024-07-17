@@ -7,6 +7,7 @@ import telran.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 import static telran.util.Arrays.*;
 
+import java.util.Comparator;
 import java.util.Random;
 
 public class ArraysTest {
@@ -139,4 +140,34 @@ void isOneSwapTest(){
     sort(sortedArray);//Sort array
     assertFalse(isOneSwap(array2, sortedArray2)); //Check if array has more than one swap to be sorted
 }
+@Test
+void sortAnyTypeTest(){
+String [] strings = {"lmn", "cfta", "w", "aa"};
+String [] expectedASCIIStrings = {"aa", "cfta", "lmn", "w"};
+String [] expectedLength = {"w", "aa", "lmn", "cfta"};
+sortT(strings, new ComparatorASCII());
+assertArrayEquals(expectedASCIIStrings, strings);
+sortT(strings, new ComparatorLength());
+assertArrayEquals(expectedLength, strings);
+}
+@Test
+void binarySearchTTest(){
+Integer[] array = {6,2,9,8,7};
+String[] strings = {"lmn", "cfta", "w", "aa"};
+Arrays.sortT(array, new ComparatorInteger());
+assertEquals(-2, Arrays.binarySearchT(array, 3, new ComparatorInteger()));
+assertEquals(0, Arrays.binarySearchT(array, 2, new ComparatorInteger()));
+assertEquals(4, Arrays.binarySearchT(array, 9, new ComparatorInteger()));
+assertEquals(2, Arrays.binarySearchT(array, 7, new ComparatorInteger()));
+Arrays.sortT(strings, new ComparatorASCII());
+assertEquals(-1, Arrays.binarySearchT(strings, "a", new ComparatorASCII()));
+assertEquals(0, Arrays.binarySearchT(strings, "aa", new ComparatorASCII()));
+assertEquals(1, Arrays.binarySearchT(strings, "cfta", new ComparatorASCII()));
+Arrays.sortT(strings, new ComparatorLength());
+assertEquals(-5, Arrays.binarySearchT(strings, "akdtf", new ComparatorLength()));
+assertEquals(0, Arrays.binarySearchT(strings, "w", new ComparatorLength()));
+assertEquals(3, Arrays.binarySearchT(strings, "cfta", new ComparatorLength()));
+}
+
+
 }
