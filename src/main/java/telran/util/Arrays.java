@@ -105,20 +105,20 @@ if (swap == 2) {
     return false;
 }
 }
-public static <T> void sortT(T[] array, Comparator<T> comparator){
-int length = array.length;
-boolean flSort = false;
-do {
-length--;
-flSort = true;
-for(int i = 0; i < length; i++) {
-    if(comparator.compare(array[i], array[i + 1]) > 0){
-        swap(array, i, i + 1);
-        flSort = false;
+    public static <T> void sortT(T[] array, Comparator<T> comparator) {
+        int length = array.length;
+        boolean flSort = false;
+        do {
+            length--;
+            flSort = true;
+            for(int i = 0; i < length; i++) {
+                if(comparator.compare(array[i], array[i + 1]) > 0) {
+                    swap(array, i, i + 1);
+                    flSort = false;
+                }
+            }
+        }while(!flSort);
     }
-}
-} while(!flSort);
-}
 
 private static <T> void swap(T[] array, int i, int j) {
     T tmp = array[i];
@@ -145,12 +145,9 @@ public static <T> int binarySearchT(T[] array, T key, Comparator<T> comp) {
 }
 
 public static <T> int binarySearchNoComp(T[] array, T key) {
-    
-
-    //TODO
-    //The code should be base on binarySearch 
-    return -1;
+    return java.util.Arrays.binarySearch(array, key);
 }
+
 public static <T> T[] insert(T [] array, int index, T item) {
     T[] res = java.util.Arrays.copyOf(array, array.length + 1);
     System.arraycopy(array, index, res, index + 1, array.length - index);
@@ -166,9 +163,8 @@ public static <T> T[] find(T[]array, Predicate<T> predicate) {
     }
     return result;
 }
+
 public static <T> T[] removeIf (T[] array, Predicate<T> predicate){
-    //TODO
-    //using oneline
-    return null;
+    return find(array, predicate.negate());
 }
 } 

@@ -197,4 +197,10 @@ void findTest() {
     Integer [] expected = {7, 13, 99};
     assertArrayEquals(expected, find(array, new OddNumbersPredicate()));
 }
+@Test
+void removeIfTest(){
+    Integer[] array = {7, -8, 10, -100, 13, -10, 99};
+    Integer[] expected = {-8,10,-100,-10};
+    assertArrayEquals(expected, removeIf(array, new OddNumbersPredicate()));
+}
 }
