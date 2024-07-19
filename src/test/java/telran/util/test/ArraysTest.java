@@ -152,22 +152,49 @@ assertArrayEquals(expectedLength, strings);
 }
 @Test
 void binarySearchTTest(){
+    Comparator<String> compStrings = new ComparatorASCII();
+    Comparator<Integer> compInteger = new ComparatorInteger();
+    Comparator<String> compLength = new ComparatorLength();
 Integer[] array = {6,2,9,8,7};
 String[] strings = {"lmn", "cfta", "w", "aa"};
-Arrays.sortT(array, new ComparatorInteger());
-assertEquals(-2, Arrays.binarySearchT(array, 3, new ComparatorInteger()));
-assertEquals(0, Arrays.binarySearchT(array, 2, new ComparatorInteger()));
-assertEquals(4, Arrays.binarySearchT(array, 9, new ComparatorInteger()));
-assertEquals(2, Arrays.binarySearchT(array, 7, new ComparatorInteger()));
-Arrays.sortT(strings, new ComparatorASCII());
-assertEquals(-1, Arrays.binarySearchT(strings, "a", new ComparatorASCII()));
-assertEquals(0, Arrays.binarySearchT(strings, "aa", new ComparatorASCII()));
-assertEquals(1, Arrays.binarySearchT(strings, "cfta", new ComparatorASCII()));
-Arrays.sortT(strings, new ComparatorLength());
-assertEquals(-5, Arrays.binarySearchT(strings, "akdtf", new ComparatorLength()));
-assertEquals(0, Arrays.binarySearchT(strings, "w", new ComparatorLength()));
-assertEquals(3, Arrays.binarySearchT(strings, "cfta", new ComparatorLength()));
+Arrays.sortT(array, compInteger);
+assertEquals(-2, Arrays.binarySearchT(array, 3, compInteger));
+assertEquals(0, Arrays.binarySearchT(array, 2, compInteger));
+assertEquals(4, Arrays.binarySearchT(array, 9, compInteger));
+assertEquals(2, Arrays.binarySearchT(array, 7, compInteger));
+Arrays.sortT(strings, compStrings);
+assertEquals(-1, Arrays.binarySearchT(strings, "a", compStrings));
+assertEquals(0, Arrays.binarySearchT(strings, "aa", compStrings));
+assertEquals(1, Arrays.binarySearchT(strings, "cfta", compStrings));
+Arrays.sortT(strings, compLength);
+assertEquals(-5, Arrays.binarySearchT(strings, "akdtf", compLength));
+assertEquals(0, Arrays.binarySearchT(strings, "w", compLength));
+assertEquals(3, Arrays.binarySearchT(strings, "cfta", compLength));
 }
-
-
+@Test
+void binarySearchNoComparator() {
+    String [] strings ={"aa", "cfta", "lmn", "w"};
+    Person prs1 = new Person(10, "Vasya");
+    Person prs2 = new Person(20, "Itay");
+    Person prs3 = new Person(30, "Sara");
+    Person [] persons = {
+        prs1, prs2, prs3
+    };
+    assertEquals(1, binarySearchNoComp(strings, "cfta"));
+    assertEquals(0, binarySearchNoComp(persons, prs1));
+    assertEquals(-1, binarySearchNoComp(persons, new Person(5, "Serg")));
+}
+@Test
+void evenOddSorting() {
+    Integer[] array = {7, -8, 10, -100, 13, -10, 99};
+    Integer[] expected = {-100, -10, -8, 10, 99, 13, 7}; //even numbers in ascending order first, odd numbers in descending order after that
+    sortT(array, new EvenOddComparator());
+    assertArrayEquals(expected, array);
+}
+@Test
+void findTest() {
+    Integer[] array = {7, -8, 10, -100, 13, -10, 99};
+    Integer [] expected = {7, 13, 99};
+    assertArrayEquals(expected, find(array, new OddNumbersPredicate()));
+}
 }
