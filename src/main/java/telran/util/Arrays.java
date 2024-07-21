@@ -145,7 +145,8 @@ public static <T> int binarySearchT(T[] array, T key, Comparator<T> comp) {
 }
 
 public static <T> int binarySearchNoComp(T[] array, T key) {
-    return java.util.Arrays.binarySearch(array, key);
+   //return java.util.Arrays.binarySearch(array, key);
+    return  binarySearchT(array, key,(Comparator<T>) Comparator.naturalOrder());
 }
 
 public static <T> T[] insert(T [] array, int index, T item) {
