@@ -273,4 +273,5 @@ public static String matchesRules(char[] chars, CharacterRule[] mustBeRules, Cha
       }
 return result.length() > 0 ? result.toString() : "All conditions are met";
     }
+    
 } 
